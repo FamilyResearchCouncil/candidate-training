@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+    app:
+        user: '1100'
+        build:
+            dockerfile: app.Dockerfile
+        labels:
+            traefik.enable: true
+            traefik.http.routers.wp01.rule: Host(`wp01.localhost`)
+            traefik.docker.network: traefik_default
+        networks:
+            - traefik_default
+            - default
+
+networks:
+    traefik_default:
+        external: true

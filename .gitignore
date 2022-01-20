@@ -1,0 +1,5 @@
+app/*
+mysql/*
+.idea/
+.env
+docker-compose.override.yml
