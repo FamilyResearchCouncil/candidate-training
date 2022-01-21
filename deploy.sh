@@ -14,6 +14,7 @@ echo "REPO_NAME: $REPO_NAME"
 echo "STACK: $STACK"
 echo "***********************"
 
+cd "$SCRIPT_DIR"
 
 echo "$PWD"
 test ! -f "$SCRIPT_DIR/.env" && {
