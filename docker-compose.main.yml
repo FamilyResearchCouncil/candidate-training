@@ -7,6 +7,9 @@ services:
                 traefik.enable: 'true'
                 traefik.http.routers.candidate-training.rule: Host(`candidates.frcaction.org`)
                 traefik.docker.network: traefik
+            placement:
+                constraints:
+                    - node.role == worker
         volumes:
             - /wordpress/data/app:/var/www/html
         networks:
