@@ -14,10 +14,11 @@ echo "REPO_NAME: $REPO_NAME"
 echo "STACK: $STACK"
 echo "***********************"
 
-if [[ ! -f ".env" ]]; then
+
+test ! -f ".env" && {
     echo "Please set up the .env file"
     exit 1
-fi
+}
 
 DEPLOY_COMMAND=(docker stack deploy --with-registry-auth)
 
@@ -25,7 +26,7 @@ test -f "docker-compose.yml" && {
     DEPLOY_COMMAND+=(-c docker-compose.yml)
 }
 
-test -f "docker-compose.yml" && {
+test -f "docker-compose.override.yml" && {
     DEPLOY_COMMAND+=(-c docker-compose.override.yml)
 }
 
