@@ -11,6 +11,7 @@ services:
         deploy:
             labels:
                 traefik.http.routers.candidatetraining.rule: Host(`candidates.frcaction.org`)
+                traefik.docker.network: traefik
             placement:
                 constraints:
                     - node.role == worker
