@@ -36,7 +36,7 @@ test -f "$file" && {
     DEPLOY_COMMAND+=(-c "$file")
 }
 
-file="$SCRIPT_DIR/$COMPOSE_FILE"
+file="$COMPOSE_FILE"
 test -f "$file" && {
     DEPLOY_COMMAND+=(-c "$file")
 }
