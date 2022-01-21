@@ -15,6 +15,7 @@ echo "STACK: $STACK"
 echo "***********************"
 
 
+echo "$PWD"
 test ! -f ".env" && {
     echo "Please set up the .env file"
     exit 1
