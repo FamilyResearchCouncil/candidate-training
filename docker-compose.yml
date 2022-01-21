@@ -2,13 +2,9 @@ version: '3.8'
 services:
     app:
         image: wordpress:php7.4
-        volumes:
-            - ./app:/var/www/html
 
 
     mysql:
         image: mysql
-        volumes:
-            - ./mysql:/var/lib/mysql
         env_file:
             -   .env

@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+    app:
+        user: '1100'
+        deploy:
+            labels:
+                traefik.enable: 'true'
+                traefik.http.routers.candidate-training.rule: Host(`candidates.frcaction.org`)
+                traefik.docker.network: traefik
+        volumes:
+            - /wordpress/data/app:/var/www/html
+        networks:
+            - traefik
+            - default
+
+    mysql:
+        volumes:
+            - /wordpress/data/mysql:/var/lib/mysql
+
+networks:
+    traefik:
+        external: true
