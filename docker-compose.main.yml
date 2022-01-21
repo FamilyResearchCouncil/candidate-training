@@ -10,9 +10,7 @@ services:
             DOMAIN_NAME: candidates.frcaction.org
         deploy:
             labels:
-                traefik.enable: 'true'
-                traefik.http.routers.candidate-training.rule: Host(`candidates.frcaction.org`)
-                traefik.docker.network: traefik
+                traefik.http.routers.candidatetraining.rule: Host(`candidates.frcaction.org`)
             placement:
                 constraints:
                     - node.role == worker
