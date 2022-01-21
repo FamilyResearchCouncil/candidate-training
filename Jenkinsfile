@@ -47,7 +47,7 @@ node('master') {
             sh "ssh docker01 mkdir -p /docker/containers/${env.GIT_REPO_NAME}"
 
             // copy the files necessary to deploy the application
-            sh "scp docker-compose.main.yml docker-compose.yml deploy.sh docker01:/docker/containers/${env.GIT_REPO_NAME}"
+            sh "scp docker-compose.main.yml docker-compose.yml deploy.sh nginx.conf docker01:/docker/containers/${env.GIT_REPO_NAME}"
 
             // run the deploy script, passing the current branch as the argument
             sh "ssh docker01 /docker/containers/candidate-training/deploy.sh ${env.BRANCH_NAME}"
