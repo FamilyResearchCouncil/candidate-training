@@ -1,6 +1,9 @@
 #!/bin/bash
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
+cd "$SCRIPT_DIR" || exit 1
+
 BRANCH_NAME="${1:-main}"
 COMPOSE_FILE="$SCRIPT_DIR/docker-compose.$BRANCH_NAME.yml"
 REPO_NAME=${PWD##*/}
@@ -14,7 +17,6 @@ echo "REPO_NAME: $REPO_NAME"
 echo "STACK: $STACK"
 echo "***********************"
 
-cd "$SCRIPT_DIR"
 
 echo "$PWD"
 test ! -f "$SCRIPT_DIR/.env" && {
