@@ -2,6 +2,12 @@ version: '3.8'
 services:
     app:
         user: '1100'
+        volumes:
+            - /wordpress/data/app:/var/www/html
+
+    nginx:
+        environment:
+            DOMAIN_NAME: candidates.frcaction.org
         deploy:
             labels:
                 traefik.enable: 'true'
@@ -10,11 +16,11 @@ services:
             placement:
                 constraints:
                     - node.role == worker
-        volumes:
-            - /wordpress/data/app:/var/www/html
         networks:
             - traefik
             - default
+        volumes:
+            - /wordpress/data/app:/var/www/html
 
     mysql:
         volumes:

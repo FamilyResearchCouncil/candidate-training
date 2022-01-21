@@ -1,8 +1,14 @@
 version: '3.8'
 services:
     app:
-        image: wordpress:php7.4
+        image: wordpress:php7.4-fpm
 
+    nginx:
+        build:
+            context: ./nginx
+        environment:
+            PROXY_PASS: app
+            PROXY_PASS_PORT: 9000
 
     mysql:
         image: mysql
