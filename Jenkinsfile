@@ -19,7 +19,7 @@ node('master') {
 
 //         stage('build'){
 //             // build the image tagged with the current branch name
-//             sh "docker build -t familyresearchcouncil/${env.GIT_REPO_NAME}:${env.BRANCH_NAME} ."
+//             sh "docker-compose build nginx"
 //         }
 
 //         stage('setup') {
@@ -40,7 +40,7 @@ node('master') {
 
 //         stage('push') {
 //             // push the image to dockerhub so it is available to pull
-//             sh "docker push familyresearchcouncil/${env.GIT_REPO_NAME}:${env.BRANCH_NAME}"
+//             sh "docker-compose push nginx"
 //         }
 
         stage('deploy') {
