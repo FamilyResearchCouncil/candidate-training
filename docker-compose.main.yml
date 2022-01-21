@@ -8,12 +8,12 @@ services:
     nginx:
         environment:
             DOMAIN_NAME: candidates.frcaction.org
+        labels:
+            traefik.enable: 'true'
+            traefik.http.routers.candidatetraining.rule: Host(`candidates.frcaction.org`)
+            traefik.http.services.candidatetraining.loadbalancer.server.port: 80
+            traefik.docker.network: traefik
         deploy:
-            labels:
-                traefik.enable: 'true'
-                traefik.http.routers.candidatetraining.rule: Host(`candidates.frcaction.org`)
-                traefik.http.services.candidatetraining.loadbalancer.server.port: 80
-                traefik.docker.network: traefik
             placement:
                 constraints:
                     - node.role == worker
