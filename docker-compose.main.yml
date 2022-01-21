@@ -10,6 +10,7 @@ services:
             DOMAIN_NAME: candidates.frcaction.org
         deploy:
             labels:
+                traefik.enable: 'true'
                 traefik.http.routers.candidatetraining.rule: Host(`candidates.frcaction.org`)
                 traefik.http.services.candidatetraining.loadbalancer.server.port: 80
                 traefik.docker.network: traefik
