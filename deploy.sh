@@ -23,17 +23,19 @@ test ! -f ".env" && {
 
 DEPLOY_COMMAND=(docker stack deploy --with-registry-auth)
 
-test -f "docker-compose.yml" && {
-    DEPLOY_COMMAND+=(-c docker-compose.yml)
+file="$SCRIPT_DIR/docker-compose.yml"
+test -f "$file" && {
+    DEPLOY_COMMAND+=(-c "$file")
 }
 
-test -f "docker-compose.override.yml" && {
-    DEPLOY_COMMAND+=(-c docker-compose.override.yml)
+file="$SCRIPT_DIR/docker-compose.override.yml"
+test -f "$file" && {
+    DEPLOY_COMMAND+=(-c "$file")
 }
 
-test -f "$COMPOSE_FILE" && {
-    echo "Deploying stack '$STACK' to the swarm"
-    DEPLOY_COMMAND+=(-c "$COMPOSE_FILE")
+file="$SCRIPT_DIR/$COMPOSE_FILE"
+test -f "$file" && {
+    DEPLOY_COMMAND+=(-c "$file")
 }
 
 DEPLOY_COMMAND+=("$STACK")
