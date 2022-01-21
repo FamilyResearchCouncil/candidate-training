@@ -16,7 +16,7 @@ echo "***********************"
 
 
 echo "$PWD"
-test ! -f ".env" && {
+test ! -f "$SCRIPT_DIR/.env" && {
     echo "Please set up the .env file"
     exit 1
 }
