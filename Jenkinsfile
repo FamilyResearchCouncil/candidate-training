@@ -59,6 +59,8 @@ node('master') {
                     subject: "${env.GIT_REPO_NAME} BUILD FAILED: ${env.BRANCH_NAME} : ${BUILD_ID}",
                     replyTo: 'eab@frc.org'
 
+         throw error
+
     } finally  {
 //         sh 'docker-compose down'
     }
