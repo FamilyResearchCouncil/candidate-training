@@ -1,10 +1,11 @@
 version: '3.8'
 services:
     app:
+        env_file: ".env.$BRANCH_NAME"
         user: '1100'
         labels:
             traefik.enable: 'true'
-            traefik.http.routers.wp01.rule: Host(`staging.candidate-training.frc.org`)
+            traefik.http.routers.candidate-training-staging.rule: Host(`staging.candidate-training.frc.org`)
             traefik.docker.network: traefik_default
         environment:
             - BRANCH_NAME

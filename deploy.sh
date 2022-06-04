@@ -26,11 +26,10 @@ echo "***********************"
 
 
 echo "$PWD"
-test ! -f "$SCRIPT_DIR/.env" && {
-    cp .env.example .env
+test ! -f "$SCRIPT_DIR/.env.$BRANCH_NAME_SLUG" && {
+    cp ".env.example" ".env.$BRANCH_NAME_SLUG"
 
     echo "Remember to set up the .env file"
-
 }
 
 # set up stack deploy command

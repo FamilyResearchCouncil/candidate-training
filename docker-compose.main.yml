@@ -1,11 +1,13 @@
 version: '3.8'
 services:
     app:
+        env_file: .env.main
         user: '1100'
         volumes:
             - /wordpress/data/app:/var/www/html
 
     nginx:
+        env_file: .env.main
         environment:
             DOMAIN_NAME: candidates.frcaction.org
         deploy:
@@ -24,6 +26,7 @@ services:
             - /wordpress/data/app:/var/www/html
 
     mysql:
+        env_file: .env.main
         volumes:
             - ./mysql:/var/lib/mysql
 
