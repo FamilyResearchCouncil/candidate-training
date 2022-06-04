@@ -5,13 +5,18 @@ if [[ -z "$1" ]]; then
     exit 1;
 fi
 
+slugify () {
+    echo "$1" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-z
+}
+
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 cd "$SCRIPT_DIR" || exit 1
 
 REPO_NAME=${PWD##*/}
-STACK="$REPO_NAME-${1:-main}"
+BRANCH_NAME=$(slugify "${1:-main}")
+STACK="$REPO_NAME-$BRANCH_NAME"
 
 echo "******** ENV **********"
 echo "WORKING_DIR: $SCRIPT_DIR"
