@@ -6,12 +6,14 @@ services:
         labels:
             traefik.enable: 'true'
             traefik.http.routers.candidate-training-staging.rule: Host(`staging.candidate-training.frc.org`)
-            traefik.docker.network: traefik_default
+            traefik.docker.network: "${TRAEFIK_NETWORK}"
         networks:
-            - traefik_default
+            - "${TRAEFIK_NETWORK}"
             - default
 
+    mysql:
+        env_file: ".env.${BRANCH_NAME_SLUG}"
+
 networks:
-    traefik_default:
-        name: "$TRAEFIK_NETWORK"
+    "${TRAEFIK_NETWORK}":
         external: true
