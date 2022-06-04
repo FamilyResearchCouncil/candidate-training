@@ -18,6 +18,8 @@ REPO_NAME=${PWD##*/}
 BRANCH_NAME_SLUG=$(slugify "${1:-main}")
 STACK="$REPO_NAME-$BRANCH_NAME_SLUG"
 
+export BRANCH_NAME_SLUG
+
 echo "******** ENV **********"
 echo "WORKING_DIR: $SCRIPT_DIR"
 echo "REPO_NAME: $REPO_NAME"
