@@ -7,8 +7,6 @@ services:
             traefik.enable: 'true'
             traefik.http.routers.candidate-training-staging.rule: Host(`staging.candidate-training.frc.org`)
             traefik.docker.network: traefik_default
-        environment:
-            - BRANCH_NAME_SLUG
         networks:
             - traefik_default
             - default
