@@ -69,6 +69,7 @@ echo "###"
 
 
 source "$SCRIPT_DIR/.env.$BRANCH_NAME_SLUG"
+printenv
 
 docker-compose "${FILES[@]}" config
 
