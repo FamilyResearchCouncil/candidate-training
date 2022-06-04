@@ -39,10 +39,12 @@ test ! -f "$SCRIPT_DIR/.env.$BRANCH_NAME_SLUG" && {
 
 # set up stack deploy command
 DEPLOY_COMMAND=(docker stack deploy --with-registry-auth)
+FILES=()
 
 # use base compose file if existing
 file="$SCRIPT_DIR/docker-compose.yml"
 test -f "$file" && {
+    FILES+=(-f "$file")
     DEPLOY_COMMAND+=(-c "$file")
 }
 
@@ -55,6 +57,7 @@ test -f "$file" || {
 
 # append branch compose file if existing
 test -f "$file" && {
+    FILES+=(-f "$file")
     DEPLOY_COMMAND+=(-c "$file")
 }
 
@@ -64,6 +67,8 @@ DEPLOY_COMMAND+=("$STACK")
 echo "### Running command"
 echo " >" "${DEPLOY_COMMAND[@]}"
 echo "###"
+
+docker-compose "$FILES[@]"
 
 
 "${DEPLOY_COMMAND[@]}"
