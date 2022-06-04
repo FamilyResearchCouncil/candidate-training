@@ -25,6 +25,7 @@ export BRANCH_NAME_SLUG
 echo "******** ENV **********"
 echo "WORKING_DIR: $SCRIPT_DIR"
 echo "REPO_NAME: $REPO_NAME"
+echo "BRANCH_NAME: $BRANCH_NAME"
 echo "STACK: $STACK"
 echo "***********************"
 
