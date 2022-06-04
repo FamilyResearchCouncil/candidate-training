@@ -4,8 +4,10 @@ services:
         user: '1100'
         labels:
             traefik.enable: true
-            traefik.http.routers.wp01.rule: Host(`wp01.localhost`)
+            traefik.http.routers.wp01.rule: Host(`staging.candidate-training.frc.org`)
             traefik.docker.network: traefik_default
+        environment:
+            - BRANCH_NAME
         networks:
             - traefik_default
             - default
