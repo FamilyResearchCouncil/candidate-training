@@ -53,7 +53,7 @@ node('master') {
             //  - all compose files
             //  - deploy script
             //  - nginx config
-            sh "scp docker-compose.*yml* deploy.sh nginx.conf docker01:/docker/containers/${env.GIT_REPO_NAME}"
+            sh "scp docker-compose.*yml* deploy.sh nginx.conf .env.example docker01:/docker/containers/${env.GIT_REPO_NAME}"
 
 
 
