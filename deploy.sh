@@ -64,11 +64,14 @@ test -f "$file" && {
 # append stack name
 DEPLOY_COMMAND+=("$STACK")
 
+echo "###  Compose config"
+echo "" "${FILES[@]}"
+echo "###"
+echo ""
 echo "### Running command"
 echo " >" "${DEPLOY_COMMAND[@]}"
 echo "###"
 
-docker-compose "${FILES[@]}"
 
 
 "${DEPLOY_COMMAND[@]}"
