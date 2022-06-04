@@ -15,10 +15,12 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 cd "$SCRIPT_DIR" || exit 1
 
 REPO_NAME=${PWD##*/}
-BRANCH_NAME_SLUG=$(slugify "${1:-main}")
+BRANCH_NAME="${1:-main}"
+BRANCH_NAME_SLUG=$(slugify "$BRANCH_NAME")
 STACK="$REPO_NAME-$BRANCH_NAME_SLUG"
 
 export BRANCH_NAME_SLUG
+
 
 echo "******** ENV **********"
 echo "WORKING_DIR: $SCRIPT_DIR"
