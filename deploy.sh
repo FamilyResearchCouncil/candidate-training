@@ -72,6 +72,7 @@ echo "### Running command"
 echo " >" "${DEPLOY_COMMAND[@]}"
 echo "###"
 
+docker-compose "${FILES[@]}" config
 
 
 "${DEPLOY_COMMAND[@]}"
