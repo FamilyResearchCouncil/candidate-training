@@ -55,7 +55,7 @@ node('master') {
             //  - base compose file
             //  - deploy script
             //  - nginx config
-            sh "scp docker-compose.yml deploy.sh nginx.conf docker01:/docker/containers/${env.GIT_REPO_NAME}"
+            sh "scp docker-compose.yml docker-compose.override.yml.example deploy.sh nginx.conf docker01:/docker/containers/${env.GIT_REPO_NAME}"
 
 
 
