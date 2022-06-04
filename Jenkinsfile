@@ -60,7 +60,7 @@ node('master') {
 
 
             // run the deploy script, passing the current branch as the argument
-            sh "ssh docker01 /docker/containers/candidate-training/deploy.sh"
+            sh "ssh docker01 /docker/containers/candidate-training/deploy.sh ${env.BRANCH_NAME}"
 
         }
 
