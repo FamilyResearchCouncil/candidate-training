@@ -46,7 +46,7 @@ file="$SCRIPT_DIR/docker-compose.$BRANCH_NAME_SLUG.yml"
 
 # use the example file if missing the branch file
 test -f "$file" || {
-  file="$SCRIPT_DIR/docker-compose.override.yml.example"
+  cp "$SCRIPT_DIR/docker-compose.override.yml.example" "$file"
 }
 
 # append branch compose file if existing
