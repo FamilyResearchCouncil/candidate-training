@@ -33,7 +33,6 @@ echo "***********************"
 echo "$PWD"
 test ! -f "$SCRIPT_DIR/.env.$BRANCH_NAME_SLUG" && {
     cp ".env.example" ".env.$BRANCH_NAME_SLUG"
-
     echo "Remember to set up the .env file"
 }
 
@@ -64,13 +63,12 @@ test -f "$file" && {
 # append stack name
 DEPLOY_COMMAND+=("$STACK")
 
-echo "###  Compose config"
-echo "" "${FILES[@]}"
-echo "###"
-echo ""
 echo "### Running command"
 echo " >" "${DEPLOY_COMMAND[@]}"
 echo "###"
+
+
+source "$SCRIPT_DIR/.env.$BRANCH_NAME_SLUG"
 
 docker-compose "${FILES[@]}" config
 
