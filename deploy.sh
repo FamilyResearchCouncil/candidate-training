@@ -15,8 +15,8 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 cd "$SCRIPT_DIR" || exit 1
 
 REPO_NAME=${PWD##*/}
-BRANCH_NAME=$(slugify "${1:-main}")
-STACK="$REPO_NAME-$BRANCH_NAME"
+BRANCH_NAME_SLUG=$(slugify "${1:-main}")
+STACK="$REPO_NAME-$BRANCH_NAME_SLUG"
 
 echo "******** ENV **********"
 echo "WORKING_DIR: $SCRIPT_DIR"
@@ -36,14 +36,20 @@ test ! -f "$SCRIPT_DIR/.env" && {
 # set up stack deploy command
 DEPLOY_COMMAND=(docker stack deploy --with-registry-auth)
 
-# append compose file if existing
+# use base compose file if existing
 file="$SCRIPT_DIR/docker-compose.yml"
 test -f "$file" && {
     DEPLOY_COMMAND+=(-c "$file")
 }
 
-# append override file if existing
-file="$SCRIPT_DIR/docker-compose.override.yml"
+file="$SCRIPT_DIR/docker-compose.$BRANCH_NAME_SLUG.yml"
+
+# use the example file if missing the branch file
+test -f "$file" || {
+  file="$SCRIPT_DIR/docker-compose.override.yml.example"
+}
+
+# append branch compose file if existing
 test -f "$file" && {
     DEPLOY_COMMAND+=(-c "$file")
 }
@@ -54,4 +60,6 @@ DEPLOY_COMMAND+=("$STACK")
 echo "### Running command"
 echo " >" "${DEPLOY_COMMAND[@]}"
 echo "###"
+
+
 "${DEPLOY_COMMAND[@]}"

@@ -48,14 +48,12 @@ node('master') {
 
             // copy the files necessary to deploy the application
 
-            // docker-compose main to docker-compose override
-            sh "scp docker-compose.main.yml docker01:/docker/containers/${env.GIT_REPO_NAME}/docker-compose.override.yml"
 
             // copy files
-            //  - base compose file
+            //  - all compose files
             //  - deploy script
             //  - nginx config
-            sh "scp docker-compose.yml docker-compose.override.yml.example deploy.sh nginx.conf docker01:/docker/containers/${env.GIT_REPO_NAME}"
+            sh "scp docker-compose.*yml deploy.sh nginx.conf docker01:/docker/containers/${env.GIT_REPO_NAME}"
 
 
 
