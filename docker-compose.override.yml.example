@@ -8,14 +8,14 @@ services:
         deploy:
 #            replicas: 1
             labels:
-                - "traefik.enable=true"
-                - "traefik.http.routers.candidate-training-staging.rule=Host(`candidate-training-staging.frcaction.org`)"
-                - "traefik.docker.network=${TRAEFIK_NETWORK}"
+                - 'traefik.enable=true'
+                - 'traefik.http.routers.candidatetraining-staging.rule=Host(`candidate-training-staging.frcaction.org`)'
+                - 'traefik.docker.network=traefik'
 #            placement:
 #                constraints:
 #                    - node.role == worker
         networks:
-            - $TRAEFIK_NETWORK
+            - traefik
             - default
 
     mysql:
@@ -23,5 +23,4 @@ services:
 
 networks:
     traefik:
-        name: $TRAEFIK_NETWORK
         external: true
