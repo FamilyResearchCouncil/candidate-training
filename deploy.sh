@@ -1,16 +1,15 @@
 #!/bin/bash
 #
 if [[ -z "$1" ]]; then
-    echo "USAGE: ./deploy.sh <branch_name>"
-    exit 1;
+  echo "USAGE: ./deploy.sh <branch_name>"
+  exit 1
 fi
 
-slugify () {
-    echo "$1" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-z
+slugify() {
+  echo "$1" | iconv -t ascii//TRANSLIT | sed -r s/[~\^]+//g | sed -r s/[^a-zA-Z0-9]+/-/g | sed -r s/^-+\|-+$//g | tr A-Z a-z
 }
 
-
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 
 cd "$SCRIPT_DIR" || exit 1
 
@@ -21,7 +20,6 @@ STACK="$REPO_NAME-$BRANCH_NAME_SLUG"
 
 export BRANCH_NAME_SLUG
 
-
 echo "******** ENV **********"
 echo "WORKING_DIR: $SCRIPT_DIR"
 echo "REPO_NAME: $REPO_NAME"
@@ -29,11 +27,10 @@ echo "BRANCH_NAME: $BRANCH_NAME"
 echo "STACK: $STACK"
 echo "***********************"
 
-
 echo "$PWD"
 test ! -f "$SCRIPT_DIR/.env.$BRANCH_NAME_SLUG" && {
-    cp ".env.example" ".env.$BRANCH_NAME_SLUG"
-    echo "Remember to set up the .env file"
+  cp ".env.example" ".env.$BRANCH_NAME_SLUG"
+  echo "Remember to set up the .env file"
 }
 
 # set up stack deploy command
@@ -43,22 +40,21 @@ FILES=()
 # use base compose file if existing
 file="$SCRIPT_DIR/docker-compose.yml"
 test -f "$file" && {
-    FILES+=(-f "$file")
-    DEPLOY_COMMAND+=(-c "$file")
+  FILES+=(-f "$file")
+  DEPLOY_COMMAND+=(-c "$file")
 }
 
 file="$SCRIPT_DIR/docker-compose.$BRANCH_NAME_SLUG.yml"
 
 # use the example file if missing the branch file
 test -f "$file" || {
-    FILES+=(-f "$SCRIPT_DIR/docker-compose.override.yml.example")
-    DEPLOY_COMMAND+=(-c "$file")
+  file="$SCRIPT_DIR/docker-compose.override.yml.example"
 }
 
 # append branch compose file if existing
 test -f "$file" && {
-    FILES+=(-f "$file")
-    DEPLOY_COMMAND+=(-c "$file")
+  FILES+=(-f "$file")
+  DEPLOY_COMMAND+=(-c "$file")
 }
 
 # append stack name
@@ -82,6 +78,5 @@ printenv
 echo '****************'
 
 docker-compose "${FILES[@]}" config
-
 
 "${DEPLOY_COMMAND[@]}"
