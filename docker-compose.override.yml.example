@@ -22,5 +22,7 @@ services:
         env_file: ".env.${BRANCH_NAME_SLUG}"
 
 networks:
+    default:
+        name: staging_candidate-training_default
     traefik:
         external: true
