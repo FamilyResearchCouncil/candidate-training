@@ -1,6 +1,7 @@
 version: '3.8'
 services:
     app:
+        container_name: staging_app
         image: bitnami/wordpress-nginx
         env_file: ".env.${BRANCH_NAME_SLUG}"
         user: '0'
@@ -19,6 +20,7 @@ services:
             - default
 
     mysql:
+        container_name: staging_mysql
         env_file: ".env.${BRANCH_NAME_SLUG}"
 
 networks:
