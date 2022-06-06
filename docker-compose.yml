@@ -3,14 +3,6 @@ services:
     app:
         image: wordpress:php7.4-fpm
 
-    nginx:
-        image: familyresearchcouncil/nginx
-        volumes:
-            - ./nginx.conf:/etc/nginx/templates/default.conf.template
-        environment:
-            DOMAIN_NAME: wp01.localhost
-            PROXY_PASS: app
-            PROXY_PASS_PORT: 9000
 
     mysql:
         image: mysql
