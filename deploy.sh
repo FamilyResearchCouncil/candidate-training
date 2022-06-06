@@ -67,6 +67,10 @@ echo "### Running command"
 echo " >" "${DEPLOY_COMMAND[@]}"
 echo "###"
 
+echo '***** config ******'
+docker-compose "${FILES[@]}" config
+echo '*******************'
+echo ''
 
 echo 'source'
 export $(cat ".env.$BRANCH_NAME_SLUG" | xargs)
