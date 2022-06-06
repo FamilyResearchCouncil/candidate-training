@@ -4,14 +4,12 @@ services:
         env_file: ".env.${BRANCH_NAME_SLUG}"
         user: '0'
 #        user: '1100' # use this if attaching to an nfs share
-        networks:
-            - $TRAEFIK_NETWORK
-            - default
 
     mysql:
         env_file: ".env.${BRANCH_NAME_SLUG}"
 
     nginx:
+        env_file: ".env.${BRANCH_NAME_SLUG}"
         deploy:
             replicas: 1
             labels:
@@ -22,6 +20,9 @@ services:
             placement:
                 constraints:
                     - node.role == worker
+        networks:
+            - $TRAEFIK_NETWORK
+            - default
 
 networks:
     traefik:
