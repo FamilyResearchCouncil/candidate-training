@@ -69,7 +69,7 @@ echo "###"
 
 
 echo 'source'
-source ".env.$BRANCH_NAME_SLUG"
+export $(cat ".env.$BRANCH_NAME_SLUG" | xargs)
 echo 'cat'
 cat ".env.$BRANCH_NAME_SLUG"
 echo '***** env ******'
