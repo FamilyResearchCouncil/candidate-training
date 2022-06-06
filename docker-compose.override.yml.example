@@ -15,5 +15,6 @@ services:
         env_file: ".env.${BRANCH_NAME_SLUG}"
 
 networks:
-    $TRAEFIK_NETWORK:
+    traefik:
+        name: $TRAEFIK_NETWORK
         external: true
