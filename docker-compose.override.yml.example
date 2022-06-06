@@ -5,10 +5,15 @@ services:
         user: '0'
 #        user: '1100' # use this if attaching to an nfs share
         deploy:
+            replicas: 1
             labels:
-                traefik.enable: 'true'
-                traefik.http.routers.candidate-training-staging.rule: Host(`staging.candidate-training.frc.org`)
-                traefik.docker.network: "${TRAEFIK_NETWORK}"
+                - "traefik.enable=true"
+                - "traefik.http.routers.candidate-training-staging.rule=Host(`staging.candidate-training.frc.org`)"
+#                - "traefik.http.services.candidate-training-staging.loadbalancer.server.port=3000"
+                - "traefik.docker.network: ${TRAEFIK_NETWORK}"
+            placement:
+                constraints:
+                    - node.role == worker
         networks:
             - $TRAEFIK_NETWORK
             - default
