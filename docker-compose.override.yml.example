@@ -4,10 +4,11 @@ services:
         env_file: ".env.${BRANCH_NAME_SLUG}"
         user: '0'
 #        user: '1100' # use this if attaching to an nfs share
-        labels:
-            traefik.enable: 'true'
-            traefik.http.routers.candidate-training-staging.rule: Host(`staging.candidate-training.frc.org`)
-            traefik.docker.network: "${TRAEFIK_NETWORK}"
+        deploy:
+            labels:
+                traefik.enable: 'true'
+                traefik.http.routers.candidate-training-staging.rule: Host(`staging.candidate-training.frc.org`)
+                traefik.docker.network: "${TRAEFIK_NETWORK}"
         networks:
             - $TRAEFIK_NETWORK
             - default
