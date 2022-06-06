@@ -68,8 +68,13 @@ echo " >" "${DEPLOY_COMMAND[@]}"
 echo "###"
 
 
-source "$SCRIPT_DIR/.env.$BRANCH_NAME_SLUG"
+echo 'source'
+source ".env.$BRANCH_NAME_SLUG"
+echo 'cat'
+cat ".env.$BRANCH_NAME_SLUG"
+echo '***** env ******'
 printenv
+echo '****************'
 
 docker-compose "${FILES[@]}" config
 
