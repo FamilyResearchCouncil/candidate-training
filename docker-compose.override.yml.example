@@ -2,7 +2,7 @@ version: '3.8'
 services:
     app:
         env_file: ".env.${BRANCH_NAME_SLUG}"
-        user: '1100'
+#        user: '1100' # use this if attaching to an nfs share
         labels:
             traefik.enable: 'true'
             traefik.http.routers.candidate-training-staging.rule: Host(`staging.candidate-training.frc.org`)
