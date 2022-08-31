@@ -4,6 +4,7 @@ services:
         user: '1100'
         volumes:
             - /wordpress/data/app:/var/www/html
+            - ./.env:/var/www/html/.env
 
     nginx:
         environment:
@@ -22,6 +23,7 @@ services:
             - default
         volumes:
             - /wordpress/data/app:/var/www/html
+            - ./.env:/var/www/html/.env
 
     mysql:
         volumes:
