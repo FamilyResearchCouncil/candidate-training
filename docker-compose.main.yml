@@ -16,7 +16,7 @@ services:
                 - 'traefik.docker.network=traefik'
             placement:
                 constraints:
-                    - node.role == worker
+                    - node.labels.type == worker
         networks:
             - traefik
             - default
